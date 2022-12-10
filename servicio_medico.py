@@ -3,6 +3,8 @@ from cliente.cambio_pw import Cambio_pw
 from cliente.agregar import agregar_paciente
 from cliente.delete_paciente import delete_paciente
 from cliente.edit_paciente import edit_paciente
+from cliente.agregar_diagnostico import Agregar_diagnostico
+
 import sqlite3
 from os import system
 import time
@@ -93,6 +95,7 @@ def main():
                     time.sleep(5)
                     return
                 elif opcion == 2:
+                    Agregar_diagnostico(isAdmin)
                     print("Saliendo")
                     return
                 elif opcion == 3:
