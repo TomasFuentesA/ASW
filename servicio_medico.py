@@ -1,6 +1,7 @@
 from cliente.login import Login
 from cliente.cambio_pw import Cambio_pw
 from cliente.agregar import agregar_paciente
+from cliente.delete_paciente import delete_paciente
 import sqlite3
 from os import system
 import time
@@ -62,8 +63,11 @@ def main():
                     print("Saliendo")
                     return
                 elif opcion == 3:
-                    print("Saliendo")
-                    return
+                    delete = delete_paciente()
+                    if int(delete) == -1:
+                        print("Se ha borrado el paciente de manera satisfactoria")
+                        time.sleep(2)
+                    system('clear')  
                 elif opcion == 4:
                     print("Saliendo")
                     return
