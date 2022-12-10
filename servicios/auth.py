@@ -40,7 +40,7 @@ while True:
             else:
                 print('Envío de datos al cliente')
                 list_post = [str(i).encode() for i in posts] 
-                connection.sendall(list_post[1])
+                connection.sendall(list_post[0])
                 break
     finally:
-        connection.close()        
+        connection.close()    

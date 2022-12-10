@@ -4,7 +4,7 @@ from os import system
 
 DATABASE_NAME = "servicios_medicos.db"
 
-isAdmin = 0
+isAdmin = -1
 correo = ""
 
 def main():
@@ -14,35 +14,30 @@ def main():
     conn.commit()
     system("clear")
     while True:
-        if isAdmin == 0:
+
+        if isAdmin < 0:
             print("Que desea hacer?")
-            print("1. Crear una nueva cuenta")
-            print("2. Ingresar a una cuenta existente")
-            print("3. Salir")
+            print("1. Ingresar a una cuenta existente")
+            print("2. Salir")
             try:
                 opcion = int(input("Ingrese una opcion: ").strip())
                 if opcion == 1:
-                    print("Creando nueva cuenta")
-#                    x = Register()
-                    #x = Register()
-                    print("Registro exitoso")
+                    print("Ingresando a una cuenta existente")
+                    x, correo = Login()
+                    print(x)
+                    isAdmin = int(x)
+                    print(isAdmin)
                     system('clear')
                 elif opcion == 2:
-                    print("Ingresando a una cuenta existente")
-                    x, y = Login()
-                    correo = y
-                    isAdmin = int(x)
-                    system('clear')
-                elif opcion == 3:
                     print("Saliendo")
                     system('clear')
                     return
                 else:
-                    print("Opcion invalida")
+                    print("Opcion invalida A")
             except:
-                print("Opcion invalida")
-        '''
-        elif isAdmin == 1:
+                print("Opcion invalida B")
+        
+        elif isAdmin == 0:
             print('Soy Admin')
             print("Que desea hacer?")
             print("1. Revisar productos")
@@ -52,13 +47,14 @@ def main():
             try:
                 opcion = int(input("Ingrese una opcion: ").strip())
                 if opcion == 1:
-                    catalogo()
+                    print("Saliendo")
+                    return
                 elif opcion == 2:
-                    preguntas_foro(isAdmin,correo)
-                    system('clear')
+                    print("Saliendo")
+                    return
                 elif opcion == 3:
-                    inventario_cli()
-                    system('clear')
+                    print("Saliendo")
+                    return
                 elif opcion == 4:
                     print("Saliendo")
                     return
@@ -66,8 +62,9 @@ def main():
                     print("Opcion invalida")
             except:
                 print("Opcion invalida")
-        elif isAdmin == 2:
-            print('Soy Cliente')
+       
+        else:
+            print('Soy Medico')
             print("Que desea hacer?")
             print("1. Revisar productos")
             print("2. Carrito")
@@ -77,15 +74,17 @@ def main():
             try:
                 opcion = int(input("Ingrese una opcion: ").strip())
                 if opcion == 1:
-                    catalogo()
+                    print("Saliendo")
+                    return
                 elif opcion == 2:
-                    carro_productos = general(carro_productos)
-                    system('clear')
+                    print("Saliendo")
+                    return
                 elif opcion == 3:
-                    carro_productos = compras(carro_productos, correo)
+                    print("Saliendo")
+                    return
                 elif opcion == 4:
-                    preguntas_foro(isAdmin,correo)
-                    system('clear')
+                    print("Saliendo")
+                    return
                 elif opcion == 5:
                     print("Saliendo")
                     return
@@ -93,21 +92,4 @@ def main():
                     print("Opcion invalida")
             except:
                 print("Opcion invalida")
-        elif isAdmin == 3:
-            print("Soy Soporte")
-            print("1. Entrar al Foro")
-            print("2. Salir")
-            try:
-                opcion = int(input("Ingrese una opcion: ").strip())
-                if opcion == 1:
-                    preguntas_foro(isAdmin,correo)
-                    system('clear')
-                elif opcion == 2:
-                    print("Saliendo")
-                    return
-                else:
-                    print("Opcion invalida")
-            except:
-                print("Opcion invalida")
-        '''
 main()
