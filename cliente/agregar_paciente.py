@@ -4,6 +4,7 @@ import sys, json
 
 def agregar_paciente():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    rut = input("Ingrese rut: ")
     nombre_s = input("Ingrese nombre: ")
     apellido_s = input("Ingrese apellido: ")
     edad = input("Ingrese edad: ")
@@ -14,7 +15,7 @@ def agregar_paciente():
     tipo_sangre = input("Ingrese tipo de sangre (opcional): ")
     anotaciones = input("Ingrese anotaciones (opcional): ")
 
-    post = str({'nombre_s': nombre_s, 'apellido_s' : apellido_s, 'edad' : edad, 'sexo' : sexo, 'contacto' : contacto, 'contacto_emergencia' : contacto_emergencia, 'direccion': direccion,'tipo_sangre' : tipo_sangre,'anotaciones': 
+    post = str({'id_paciente': rut,'nombre_s': nombre_s, 'apellido_s' : apellido_s, 'edad' : edad, 'sexo' : sexo, 'contacto' : contacto, 'contacto_emergencia' : contacto_emergencia, 'direccion': direccion,'tipo_sangre' : tipo_sangre,'anotaciones': 
     anotaciones}).replace("'",'"').encode()
     
     # Connect the socket to the port where the server is listening

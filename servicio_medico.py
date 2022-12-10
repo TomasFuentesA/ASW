@@ -1,6 +1,6 @@
 from cliente.login import Login
 from cliente.cambio_pw import Cambio_pw
-from cliente.agregar import agregar_paciente
+from cliente.agregar_paciente import agregar_paciente
 from cliente.delete_paciente import delete_paciente
 from cliente.edit_paciente import edit_paciente
 from cliente.agregar_diagnostico import Agregar_diagnostico
