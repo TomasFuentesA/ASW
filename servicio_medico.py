@@ -23,7 +23,7 @@ def main():
                 opcion = int(input("Ingrese una opcion: ").strip())
                 if opcion == 1:
                     print("Ingresando a una cuenta existente")
-                    x, correo = Login()
+                    x = Login()
                     print(x)
                     isAdmin = int(x)
                     print(isAdmin)
@@ -93,3 +93,4 @@ def main():
             except:
                 print("Opcion invalida")
 main()
+

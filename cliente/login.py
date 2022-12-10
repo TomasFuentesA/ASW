@@ -10,7 +10,7 @@ def Login():
     post = str({'usuario': usuario, 'pw': pw}).replace("'",'"').encode()
     
     # Connect the socket to the port where the server is listening
-    server_address = ('localhost', 5001)
+    server_address = ('localhost', 5005)
     print('connecting to {} port {}'.format(*server_address))
     sock.connect(server_address)
     try: 
@@ -22,7 +22,10 @@ def Login():
             data = sock.recv(4096)
             amount_received += len(data)
             print('received {!r}'.format(data))
-            return data.decode("utf-8"), usuario
+
+            datos = list(data.decode("utf-8").split(" "))
+            print(datos[0])
+            return datos[0], datos[6]
     finally:
         print('closing socket')
         sock.close()

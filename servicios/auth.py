@@ -9,7 +9,7 @@ database = get_db()
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('localhost', 5001)
+server_address = ('localhost', 5005)
 print('starting up on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
@@ -39,8 +39,10 @@ while True:
                 break
             else:
                 print('Envío de datos al cliente')
-                list_post = [str(i).encode() for i in posts] 
-                connection.sendall(list_post[0])
+                list_post = [str(i) for i in posts]
+                list_post =  ' '.join(list_post)
+                print(list_post)
+                connection.sendall(list_post.encode())
                 break
     finally:
-        connection.close()    
+        connection.close()      
