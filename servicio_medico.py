@@ -2,6 +2,7 @@ from cliente.login import Login
 from cliente.cambio_pw import Cambio_pw
 import sqlite3
 from os import system
+import time
 
 DATABASE_NAME = "servicios_medicos.db"
 
@@ -25,10 +26,14 @@ def main():
                 if opcion == 1:
                     print("Ingresando a una cuenta existente")
                     id_cuenta, flag = Login()
-                    if flag:
-                        Cambio_pw(id_cuenta)
-                    print(id_cuenta)
                     isAdmin = int(id_cuenta)
+                    print(flag)
+                    time.sleep(10)
+                    if flag:
+                        x, id_c = Cambio_pw(id_cuenta)
+                        isAdmin = int(x)
+                        print('Vuelve a iniciar sesion')
+                    print(id_cuenta)
                     print(isAdmin)
                     system('clear')
                 elif opcion == 2:

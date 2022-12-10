@@ -29,18 +29,16 @@ while True:
             data = json.loads(data)
             print('received {!r}',data)
 
-            cursor = database.cursor()
-            statement = "UPDATE SET cuenta.contrasena = '"+data["c_Password"]+"' * FROM cuenta WHERE id_cuenta = '" + data["Usuario"] + "' AND contrasena = '"+data["Password"]+"';" #Solo select flag
-            cursor.execute(statement)
-            posts = cursor.fetchone()
-            print(posts)
-            if posts == None:
-                print('Correo o contraseña incorrecta', client_address)
+            if data["c_Password"] != data["Password"]:
+                cursor = database.cursor()
+                statement = "UPDATE cuenta SET contrasena = '"+data["c_Password"]+"' AND flag_contrasena=1 WHERE id_cuenta = '" + data["Usuario"] + "' AND contrasena = '"+data["Password"]+"';" #Solo select flag
+                cursor.execute(statement)
+                database.commit()
+                print('Envío de datos al cliente')
+                connection.sendall(str(-1).encode())
                 break
             else:
-                print('Envío de datos al cliente')
-                list_post = [str(i).encode() for i in posts] 
-                connection.sendall(list_post[0])
+                print('Correo o contraseña incorrecta', client_address)
                 break
     finally:
-        connection.close()    
+        connection.close()   
