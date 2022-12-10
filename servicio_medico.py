@@ -1,5 +1,6 @@
 from cliente.login import Login
 from cliente.cambio_pw import Cambio_pw
+from cliente.agregar import agregar_paciente
 import sqlite3
 from os import system
 import time
@@ -74,7 +75,7 @@ def main():
         else:
             print('Soy Medico')
             print("Que desea hacer?")
-            print("1. Revisar productos")
+            print("1. añadir paciente")
             print("2. Carrito")
             print("3. Comprar articulos del carrito")
             print("4. Entrar al Foro")
@@ -82,7 +83,9 @@ def main():
             try:
                 opcion = int(input("Ingrese una opcion: ").strip())
                 if opcion == 1:
-                    print("Saliendo")
+                    agregar_paciente()
+                    print("agregado")
+                    time.sleep(5)
                     return
                 elif opcion == 2:
                     print("Saliendo")
