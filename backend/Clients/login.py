@@ -4,15 +4,13 @@ import sys, json
 
 def Login():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-    
     usuario = input("Ingrese Correo: ")
     pw = input("Ingrese Password: ")
     print(f"usuario: {usuario}, Password: {pw}")
     post = str({'usuario': usuario, 'pw': pw}).replace("'",'"').encode()
     
     # Connect the socket to the port where the server is listening
-    server_address = ('localhost', 5001)
+    server_address = ('localhost', 5000)
     print('connecting to {} port {}'.format(*server_address))
     sock.connect(server_address)
     try: 
