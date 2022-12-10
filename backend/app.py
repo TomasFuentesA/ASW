@@ -24,10 +24,10 @@ def login():
         if (log[0] and log[1] == None):
             return []
         else:
-            if log[1][6] == 0:
-                return render_template('cambio_contraseña.html')
+            if log[1][6] == False:
+                return render_template('cambio_contraseña.html', mail=mail)
             else:       
-                return render_template('menu.html')
+                return jsonify(log[1])
 
 
 if __name__ == '__main__':

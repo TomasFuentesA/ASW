@@ -34,6 +34,6 @@ CREATE TABLE diagnostico_medico (
 );
 
 
-INSERT INTO cuenta(id_cuenta, correo, contrasena, nombre_s,apellido_s)
-VALUES(0,'admin@admin.cl','admin1234','admin','admin'),
-      (1,'medico1@medico1.cl','medico1234','medico1','medico1');
+INSERT INTO cuenta(id_cuenta, correo, contrasena, nombre_s,apellido_s,especialidad,flag_contrasena)
+VALUES(0,'admin@admin.cl','admin1234','admin','admin','admin',TRUE),
+      (1,'medico1@medico1.cl','medico1234','medico1','medico1','Neurocirujano',FALSE);
