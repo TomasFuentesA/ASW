@@ -18,7 +18,7 @@ while True:
     passw = input('Ingrese su contraseña: ')
     service = 'service_example'
     size = len(usuario) + len(passw) + len(service) + 1
-    msg = getSize(size) + 'service_example' + usuario + ' ' + passw
+    msg = getSize(str(size)) + 'service_example' + usuario + ' ' + passw
     
     sock.send(msg.encode('utf-8'))
     resp = sock.recv(4096)
