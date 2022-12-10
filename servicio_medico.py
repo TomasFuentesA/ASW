@@ -1,14 +1,15 @@
-from backend.Clients.login import Login
+from cliente.login import Login
 import sqlite3
 from os import system
 
+DATABASE_NAME = "servicios_medicos.db"
 
 isAdmin = 0
 correo = ""
 
 def main():
     global isAdmin, correo
-    conn = sqlite3.connect(host="db", database="sistema_medico", user="postgres", password="postgres")
+    conn = sqlite3.connect(DATABASE_NAME)
     cur = conn.cursor()
     conn.commit()
     system("clear")

@@ -1,15 +1,15 @@
 import socket, sys, json
 import os
-from db import connection
+from db import get_db
 import hashlib
 
 
-database = connection()
+database = get_db()
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('localhost', 5000)
+server_address = ('localhost', 5001)
 print('starting up on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
@@ -30,14 +30,17 @@ while True:
             print('received {!r}',data)
 
             cursor = database.cursor()
-            statement = "SELECT * FROM cuenta WHERE correo = '" + data["mail"] + "' AND contrasena = '"+data["password"]+"';" #Solo select flag
+            statement = "SELECT * FROM cuenta WHERE correo = '" + data["usuario"] + "' AND contrasena = '"+data["pw"]+"';" #Solo select flag
             cursor.execute(statement)
-            if cursor.fetchone() == None:
+            posts = cursor.fetchone()
+            print(posts)
+            if posts == None:
                 print('Correo o contraseña incorrecta', client_address)
                 break
             else:
                 print('Envío de datos al cliente')
-                connection.sendall(cursor.fetchone().encode())
+                list_post = [str(i).encode() for i in posts] 
+                connection.sendall(list_post[1])
                 break
     finally:
         connection.close()        

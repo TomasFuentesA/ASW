@@ -9,7 +9,7 @@ CREATE TABLE cuenta(
    nombre_s TEXT NOT NULL,
    apellido_s TEXT NOT NULL,
    especialidad TEXT,
-   flag_contrasena boolean NOT NULL
+   flag_contrasena INTEGER NOT NULL
 );
 
 CREATE TABLE paciente (
@@ -38,6 +38,6 @@ CREATE TABLE diagnostico_medico (
 );
 
 
-INSERT INTEGERO cuenta(id_cuenta, correo, contrasena, nombre_s,apellido_s,especialidad,flag_contrasena)
-VALUES(0,'admin@admin.cl','admin1234','admin','admin','admin',TRUE),
-      (1,'medico1@medico1.cl','medico1234','medico1','medico1','Neurocirujano',FALSE);
+INSERT INTO cuenta(id_cuenta, correo, contrasena, nombre_s,apellido_s,especialidad,flag_contrasena)
+VALUES(0,'admin@admin.cl','admin1234','admin','admin','admin',1),
+      (1,'medico1@medico1.cl','medico1234','medico1','medico1','Neurocirujano',0);
