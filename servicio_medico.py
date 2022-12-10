@@ -13,7 +13,6 @@ def main():
     conn.commit()
     system("clear")
     while True:
-        #system("cls")
         if isAdmin == 0:
             print("Que desea hacer?")
             print("1. Crear una nueva cuenta")
@@ -24,6 +23,7 @@ def main():
                 if opcion == 1:
                     print("Creando nueva cuenta")
 #                    x = Register()
+                    #x = Register()
                     print("Registro exitoso")
                     system('clear')
                 elif opcion == 2:

@@ -1,3 +1,7 @@
+DROP TABLE IF EXISTS cuenta;
+DROP TABLE IF EXISTS paciente;
+DROP TABLE IF EXISTS diagnostico_medico;
+
 CREATE TABLE cuenta(
    id_cuenta SERIAL PRIMARY KEY,
    correo varchar(255) NOT NULL,
