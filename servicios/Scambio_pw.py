@@ -30,7 +30,7 @@ while True:
             print('received {!r}',data)
 
             cursor = database.cursor()
-            statement = "UPDATE SET cuenta.contrasena = '"+data["c_Password"]+"' * FROM cuenta WHERE correo = '" + data["Usuario"] + "' AND contrasena = '"+data["Password"]+"';" #Solo select flag
+            statement = "UPDATE SET cuenta.contrasena = '"+data["c_Password"]+"' * FROM cuenta WHERE id_cuenta = '" + data["Usuario"] + "' AND contrasena = '"+data["Password"]+"';" #Solo select flag
             cursor.execute(statement)
             posts = cursor.fetchone()
             print(posts)

@@ -1,4 +1,5 @@
 from cliente.login import Login
+from cliente.cambio_pw import Cambio_pw
 import sqlite3
 from os import system
 
@@ -23,9 +24,11 @@ def main():
                 opcion = int(input("Ingrese una opcion: ").strip())
                 if opcion == 1:
                     print("Ingresando a una cuenta existente")
-                    x = Login()
-                    print(x)
-                    isAdmin = int(x)
+                    id_cuenta, flag = Login()
+                    if flag:
+                        Cambio_pw(id_cuenta)
+                    print(id_cuenta)
+                    isAdmin = int(id_cuenta)
                     print(isAdmin)
                     system('clear')
                 elif opcion == 2:
@@ -93,4 +96,3 @@ def main():
             except:
                 print("Opcion invalida")
 main()
-
