@@ -9,7 +9,7 @@ database = get_db()
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('localhost', 5002)
+server_address = ('localhost', 5010)
 print('starting up on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
@@ -31,7 +31,7 @@ while True:
 
             if data["c_Password"] != data["Password"]:
                 cursor = database.cursor()
-                statement = "UPDATE cuenta SET contrasena = '"+data["c_Password"]+"' AND flag_contrasena=1 WHERE id_cuenta = '" + data["Usuario"] + "' AND contrasena = '"+data["Password"]+"';" #Solo select flag
+                statement = "UPDATE cuenta SET contrasena = '"+data["c_Password"]+"', flag_contrasena = 1 WHERE id_cuenta = '" + data["Usuario"] + "' AND contrasena = '"+data["Password"]+"';" #Solo select flag
                 cursor.execute(statement)
                 database.commit()
                 print('Envío de datos al cliente')
@@ -41,4 +41,4 @@ while True:
                 print('Correo o contraseña incorrecta', client_address)
                 break
     finally:
-        connection.close()   
+        connection.close()  

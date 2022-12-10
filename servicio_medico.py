@@ -4,7 +4,7 @@ import sqlite3
 from os import system
 import time
 
-DATABASE_NAME = "servicios_medicos.db"
+DATABASE_NAME = "servicios/servicios_medicos.db"
 
 isAdmin = -1
 correo = ""
@@ -29,7 +29,7 @@ def main():
                     isAdmin = int(id_cuenta)
                     print(flag)
                     time.sleep(10)
-                    if flag:
+                    if not int(flag):
                         x, id_c = Cambio_pw(id_cuenta)
                         isAdmin = int(x)
                         print('Vuelve a iniciar sesion')
