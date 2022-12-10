@@ -1,8 +1,14 @@
 version: '3.5'
 
+networks:
+  asw_network:
+
 services:
 
+
   db:
+    networks:
+      - asw_network 
     build:
       context: ./db/
       dockerfile: Dockerfile
@@ -17,6 +23,8 @@ services:
       - POSTGRES_PASSWORD=postgres   
 
   bus:
+    networks:
+      - asw_network 
     container_name: bus
     restart: always
     build:
@@ -32,3 +40,16 @@ services:
       - "3000:5000"
     volumes:
       - ./bus:/app
+
+  backend:
+    networks:
+      - asw_network
+
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    ports: 
+      - "8000:5000"
+
+    depends_on:
+      - db        
