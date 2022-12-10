@@ -4,7 +4,8 @@ CREATE TABLE cuenta(
    contrasena varchar(255) NOT NULL,
    nombre_s varchar(255) NOT NULL,
    apellido_s varchar(255) NOT NULL,
-   especialidad varchar(255)
+   especialidad varchar(255),
+   flag_contrasena boolean NOT NULL
 );
 
 CREATE TABLE paciente (
