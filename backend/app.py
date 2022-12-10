@@ -1,14 +1,17 @@
 from flask import Flask, request, jsonify, redirect, render_template
 from service_login import service_login
 
+from cambiar_contrasena import *
 import os
 import time
+
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def main():
     return render_template('login.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -28,6 +31,18 @@ def login():
                 return render_template('cambio_contraseña.html', mail=mail)
             else:       
                 return jsonify(log[1])
+
+@app.route('/cambio_pw', methods=['POST'])
+def cambio_contrasena():
+    mail = request.form.get('mail')
+    password = request.form.get('password')
+    c_password = request.form.get('c_password')
+    if password == c_password:
+        log = service_cambio_contrasena(mail,password)
+
+        return render_template('menu.html')
+    else:
+        return render_template('cambio_contraseña.html', value='Contraseña no coinciden')    
 
 
 if __name__ == '__main__':

@@ -1,8 +1,8 @@
 <h1>CAMBIO CONTRASEÑA</h1>
 
-{{% IF value %}}
-    <p>{value</p>
-{{% END IF %}}
+{% if value %}
+    <p>{{value}}</p>
+{% endif %}
 <form action="/cambio_pw" method="post">
     <label for="uname"><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="mail" placeholder="{{ mail }}" value="{{mail}}" readonly>
