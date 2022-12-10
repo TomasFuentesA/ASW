@@ -1,8 +1,8 @@
 from flask import Flask, request, jsonify, redirect, render_template
-from backend.service_login import service_login
+from service_login import service_login
 
-import sqlite3
 import os
+import time
 
 app = Flask(__name__)
 
@@ -18,7 +18,17 @@ def login():
     else:
         mail = request.form.get('mail')
         password = request.form.get('password')
-        if (service_login(mail, password)):
-            return jsonify({'mail': mail, 'password': password})
+        log = service_login(mail, password)
+        if not log[0]:
+            return []
+        if (log[0] and log[1] == None):
+            return []
         else:
-            return 0
+            if log[1][6] == 0:
+                return render_template('cambio_contraseña.html')
+            else:       
+                return render_template('menu.html')
+
+
+if __name__ == '__main__':
+    time.sleep(25)
