@@ -23,23 +23,31 @@ while True:
     try:
         print('connection from', client_address)
 
-        # Receive the data in small chunks and retransmit it
+        # Verificar ultima coma, cambiar nombre de parametros a los de la DB, verificar tipos de datos en el ingreso, terminar update.
         while True:
             data = connection.recv(65507).decode()
             data = json.loads(data)
             print('received {!r}',data) 
-    finally:
-        connection.close()
-'''
-            if data["c_Password"] != data["Password"]:
+            if data["RUT"] != '':
                 cursor = database.cursor()
-                statement = "UPDATE cuenta SET contrasena = '"+data["c_Password"]+"', flag_contrasena = 1 WHERE id_cuenta = '" + data["Usuario"] + "' AND contrasena = '"+data["Password"]+"';" #Solo select flag
+                statement = "UPDATE paciente SET "
+                for key, value in data.items():
+                    if value != '':
+                        if key == "anotaciones":
+                            statement = statement+key+"="+value+' '
+                        else:
+                            statement = statement+key+"="+value+', '
+                statement = statement + 'WHERE id_paciente = '+data['RUT']
+            print(statement)
+    finally:
+       connection.close()
+'''
                 cursor.execute(statement)
                 database.commit()
                 print('Envío de datos al cliente')
                 connection.sendall(str(-1).encode())
                 break
             else:
-                print('Correo o contraseña incorrecta', client_address)
+                print('Debe ingresar Rut del paciente', client_address)
                 break
-''' 
+'''
