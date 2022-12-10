@@ -2,6 +2,7 @@ from cliente.login import Login
 from cliente.cambio_pw import Cambio_pw
 from cliente.agregar import agregar_paciente
 from cliente.delete_paciente import delete_paciente
+from cliente.edit_paciente import edit_paciente
 import sqlite3
 from os import system
 import time
@@ -80,8 +81,8 @@ def main():
             print('Soy Medico')
             print("Que desea hacer?")
             print("1. añadir paciente")
-            print("2. Carrito")
-            print("3. Comprar articulos del carrito")
+            print("2. añadir diagnostico")
+            print("3. editar paciente")
             print("4. Entrar al Foro")
             print("5. Salir")
             try:
@@ -95,7 +96,8 @@ def main():
                     print("Saliendo")
                     return
                 elif opcion == 3:
-                    print("Saliendo")
+                    print("Editar Paciente")
+                    valor = edit_paciente()
                     return
                 elif opcion == 4:
                     print("Saliendo")
