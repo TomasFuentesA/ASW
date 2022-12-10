@@ -5,6 +5,7 @@ from cliente.delete_paciente import delete_paciente
 from cliente.edit_paciente import edit_paciente
 from cliente.agregar_diagnostico import Agregar_diagnostico
 from cliente.historial_medico import historial_medico
+from cliente.agregar_cuenta import agregar_medico
 
 import sqlite3
 from os import system
@@ -54,15 +55,14 @@ def main():
         elif isAdmin == 0:
             print('Soy Admin')
             print("Que desea hacer?")
-            print("1. Revisar productos")
+            print("1. Añadir cuenta")
             print("2. Entrar al Foro")
             print("3. Modificar inventario")
             print("4. Salir")
             try:
                 opcion = int(input("Ingrese una opcion: ").strip())
                 if opcion == 1:
-                    print("Saliendo")
-                    return
+                    agregar_medico()
                 elif opcion == 2:
                     print("Saliendo")
                     return
