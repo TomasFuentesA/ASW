@@ -2,12 +2,27 @@ version: '3.5'
 
 services:
 
+  db:
+    build:
+      context: ./db/
+      dockerfile: Dockerfile
+    container_name: postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    volumes:
+      - './db/init:/docker-entrypoint-initdb.d/'
+    environment:
+      - bind-address=0.0.0.0
+      - POSTGRES_DB=sistema_medico
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres   
 
   bus:
     container_name: bus
     restart: always
     build:
-      context: ./ASW/bus/
+      context: ./bus/
       dockerfile: Dockerfile
       args:
         SSHPASS: ${BUS_PASS}
