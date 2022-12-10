@@ -10,7 +10,7 @@ def service_login(mail, password):
     conn = connection()
     cursor = conn.cursor()
     try: 
-        statement = "SELECT * FROM cuenta WHERE correo = '" + mail + "' AND contrasena = '"+password+"';"
+        statement = "SELECT * FROM cuenta WHERE correo = '" + mail + "' AND contrasena = '"+password+"';" #Solo select flag
         cursor.execute(statement, [mail, password])
         return (True, cursor.fetchone())
 
