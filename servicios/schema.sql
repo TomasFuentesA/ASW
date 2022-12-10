@@ -42,5 +42,5 @@ INSERT INTO cuenta(id_cuenta, correo, contrasena, nombre_s,apellido_s,especialid
 VALUES(0,'admin@admin.cl','admin1234','admin','admin','admin',1),
       (1,'medico1@medico1.cl','medico1234','medico1','medico1','Neurocirujano',0);
 
-INSERT INTO paciente(id_paciente, nombre_s, apellido_s, edad, sexo, contacto, contacto_emergencia, direccion, tipo_sangre, anotaciones)
-VALUES(0,'Jorge','Elliot','75','M',569123456789,0,'',2,'Pase las Notas');      
+INSERT INTO paciente(nombre_s, apellido_s, edad, sexo, contacto, contacto_emergencia, direccion, tipo_sangre, anotaciones)
+VALUES('Jorge','Elliot','75',1,569123456789,0,'',2,'Pase las Notas');      

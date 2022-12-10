@@ -14,7 +14,7 @@ def agregar_paciente():
     tipo_sangre = input("Ingrese tipo de sangre (opcional): ")
     anotaciones = input("Ingrese anotaciones (opcional): ")
 
-    post = str({'nombres_s': nombre_s, 'apellido_s' : apellido_s, 'edad' : edad, 'sexo' : sexo, 'contacto' : contacto, 'contacto_emergencia' : contacto_emergencia, 'direccion': direccion,'tipo_sangre' : tipo_sangre,'anotaciones': 
+    post = str({'nombre_s': nombre_s, 'apellido_s' : apellido_s, 'edad' : edad, 'sexo' : sexo, 'contacto' : contacto, 'contacto_emergencia' : contacto_emergencia, 'direccion': direccion,'tipo_sangre' : tipo_sangre,'anotaciones': 
     anotaciones}).replace("'",'"').encode()
     
     # Connect the socket to the port where the server is listening
@@ -27,7 +27,7 @@ def agregar_paciente():
         amount_expected = len(post)
 
         while amount_received < amount_expected:
-            data = sock.recv(4096)
+            data = sock.recv(1000000)
             amount_received += len(data)
             print('received {!r}'.format(data))
 

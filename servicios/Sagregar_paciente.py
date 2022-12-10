@@ -25,19 +25,19 @@ while True:
 
         # Receive the data in small chunks and retransmit it
         while True:
-            data = connection.recv(4096).decode()
+            data = connection.recv(1000000).decode()
             data = json.loads(data)
             print('received {!r}',data)
 
-            if data["c_Password"] != data["Password"]:
+            try:
                 cursor = database.cursor()
-                statement = "INSERT INTO paciente (nombre_s, apellido_s, edad, sexo, contacto, contacto_emergencia, direccion, tipo_sangre, anotaciones) VALUES ('"+data["nombre_s"]+"','"+data["apellido_s"]+"','"+data["edad"]+"','"+data["sexo"]+"','"+data["contacto"]+"','"+data["contacto_emergencia"]+"','"+data["direccion"]+"','"+data["tipo_sangre"]+"','"+data["anotaciones"]+")';" #Solo select flag
-                cursor.execute(statement)
+                statement = "INSERT INTO paciente (nombre_s, apellido_s, edad, sexo, contacto, contacto_emergencia, direccion, tipo_sangre, anotaciones) VALUES (?,?,?,?,?,?,?,?,?);" #Solo select flag
+                cursor.execute(statement,[data["nombre_s"],data["apellido_s"],int(data["edad"]),int(data["sexo"]),int(data["contacto"]),int(data["contacto_emergencia"]),data["direccion"],int(data["tipo_sangre"]),data["anotaciones"]])
                 database.commit()
                 print('Envío de datos al cliente')
                 connection.sendall(str(1).encode())
                 break
-            else:
+            except:
                 print('Ingreso paciente erroneo', client_address)
                 break
     finally:
