@@ -1,6 +1,8 @@
 FROM alpine:3.16.0
-COPY . /app
-WORKDIR /app
+
+
+COPY bus.sh ./
+
 ARG SSHPASS
 ARG USER
 ARG SERVER
@@ -12,4 +14,6 @@ ENV PORT $PORT
 RUN apk add openssh
 RUN apk add --update --no-cache sshpass
 EXPOSE 5000
-CMD sh socket.sh
+COPY . .
+
+CMD sh bus.sh

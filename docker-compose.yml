@@ -1,0 +1,21 @@
+version: '3.5'
+
+services:
+
+
+  bus:
+    container_name: bus
+    restart: always
+    build:
+      context: ./ASW/bus/
+      dockerfile: Dockerfile
+      args:
+        SSHPASS: ${BUS_PASS}
+        USER: ${BUS_USER}
+        SERVER: ${BUS_SERVER}
+    env_file:
+      - .env
+    ports:
+      - "3000:5000"
+    volumes:
+      - ./bus:/app
