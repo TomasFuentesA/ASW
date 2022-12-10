@@ -1,5 +1,5 @@
 from backend.Clients.login import Login
-
+import sqlite3
 from os import system
 
 
@@ -8,6 +8,9 @@ correo = ""
 
 def main():
     global isAdmin, correo
+    conn = sqlite3.connect(host="db", database="sistema_medico", user="postgres", password="postgres")
+    cur = conn.cursor()
+    conn.commit()
     system("clear")
     while True:
         if isAdmin == 0:
@@ -19,6 +22,7 @@ def main():
                 opcion = int(input("Ingrese una opcion: ").strip())
                 if opcion == 1:
                     print("Creando nueva cuenta")
+#                    x = Register()
                     #x = Register()
                     print("Registro exitoso")
                     system('clear')
