@@ -6,7 +6,6 @@ from cliente.edit_paciente import edit_paciente
 from cliente.agregar_diagnostico import Agregar_diagnostico
 from cliente.historial_medico import historial_medico
 from cliente.agregar_cuenta import agregar_medico
-from cliente.delete_medico import delete_medico
 
 import sqlite3
 from os import system

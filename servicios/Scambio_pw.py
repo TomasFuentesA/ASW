@@ -27,7 +27,19 @@ while True:
         while True:
             data = connection.recv(4096).decode()
             data = json.loads(data)
-#           print('received {!r}',data)
+            #print('received {!r}',data)
+
+            m = hashlib.sha256()
+            pw = bytes(data["c_Password"],'UTF-8')
+            m.update(pw)
+            data["c_Password"] = m.hexdigest()
+            print(data["c_Password"])
+
+            m = hashlib.sha256()
+            pw = bytes(data["Password"],'UTF-8')
+            m.update(pw)
+            data["Password"] = m.hexdigest()
+            print(data["Password"])
 
             if data["c_Password"] != data["Password"]:
                 cursor = database.cursor()
