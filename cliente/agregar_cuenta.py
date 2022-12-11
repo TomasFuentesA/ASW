@@ -1,13 +1,13 @@
 import socket, pickle
 import sys, json
 from cliente.verificar_rut import verificar_rut
-
+from cliente.detect_email import detect_email
 def agregar_medico():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     while True:
         rut = input("Ingrese rut: ")
-        if(verificar_rut(rut)):
-            correo = input("Ingrese correo: ")
+        correo = input("Ingrese correo: ")
+        if(verificar_rut(rut) and detect_email(correo)):
             contrasena = input("Ingrese contrasena: ")
             nombre_s = input("Ingrese nombre: ")
             apellido_s = input("Ingrese apellido: ")
@@ -36,4 +36,4 @@ def agregar_medico():
                 print('closing socket')
                 sock.close()
         else:
-            print("Ingrese rut valido")
+            print("Ingrese rut o email válido")
