@@ -13,7 +13,7 @@ import time
 
 DATABASE_NAME = "servicios/servicios_medicos.db"
 
-isAdmin = 10
+isAdmin = -1
 correo = ""
 
 def main():
@@ -33,14 +33,17 @@ def main():
                 if opcion == 1:
                     print("Ingresando a una cuenta existente")
                     id_cuenta, flag = Login()
-                    isAdmin = int(id_cuenta)
-                    print(flag)
-                    time.sleep(10)
-                    if not int(flag):
-                        x, id_c = Cambio_pw(id_cuenta)
-                        isAdmin = int(x)
-                        print('Vuelve a iniciar sesion')
-                    print(id_cuenta)
+                    #verificar que sea admin con id_cuenta == '0'
+                    if id_cuenta == '0':
+                        isAdmin = 0
+                    else:
+                        if not int(flag):
+                            x, id_c = Cambio_pw(id_cuenta)
+                            isAdmin = int(x)
+                            print('Vuelve a iniciar sesion')
+                            time.sleep(2)
+                        else:
+                            isAdmin = int(flag)
                     system('clear')
                 elif opcion == 2:
                     print("Saliendo")
@@ -49,14 +52,14 @@ def main():
                 else:
                     print("Opcion invalida A")
             except:
-                print("Opcion invalida B")
+                print("Error ingreso de sesion, verificar datos")
         
         elif isAdmin == 0:
             print('Soy Admin')
             print("Que desea hacer?")
-            print("1. Añadir cuenta")
+            print("1. añadir cuenta")
             print("2. Entrar al Foro")
-            print("3. Eliminar paciente")
+            print("3. Modificar inventario")
             print("4. Salir")
             try:
                 opcion = int(input("Ingrese una opcion: ").strip())
@@ -78,7 +81,6 @@ def main():
                     print("Opcion invalida")
             except:
                 print("Opcion invalida")
-       
         else:
             print('Soy Medico')
             print("Que desea hacer?")
@@ -100,18 +102,11 @@ def main():
 
                 elif opcion == 3:
                     print("Editar Paciente")
-                    editar = edit_paciente()
-                    if int(editar) == 1:
-                        print("Se ha modificado el paciente de manera satisfactoria")
-                        time.sleep(2)
-                    else:
-                        print("Error al ingresar paciente o datos a cambiar")
-                        time.sleep(2)
-                    system('clear')  
+                    valor = edit_paciente()
 
                 elif opcion == 4:
                     historial_medico()
-
+                    print("Saliendo")
                 elif opcion == 5:
                     print("Saliendo")
                     return
