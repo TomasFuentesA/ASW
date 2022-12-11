@@ -13,7 +13,7 @@ import time
 
 DATABASE_NAME = "servicios/servicios_medicos.db"
 
-isAdmin = -1
+isAdmin = 10
 correo = ""
 
 def main():
@@ -41,7 +41,6 @@ def main():
                         isAdmin = int(x)
                         print('Vuelve a iniciar sesion')
                     print(id_cuenta)
-                    print(isAdmin)
                     system('clear')
                 elif opcion == 2:
                     print("Saliendo")
@@ -57,7 +56,7 @@ def main():
             print("Que desea hacer?")
             print("1. Añadir cuenta")
             print("2. Entrar al Foro")
-            print("3. Modificar inventario")
+            print("3. Eliminar paciente")
             print("4. Salir")
             try:
                 opcion = int(input("Ingrese una opcion: ").strip())
@@ -101,7 +100,14 @@ def main():
 
                 elif opcion == 3:
                     print("Editar Paciente")
-                    valor = edit_paciente()
+                    editar = edit_paciente()
+                    if int(editar) == 1:
+                        print("Se ha modificado el paciente de manera satisfactoria")
+                        time.sleep(2)
+                    else:
+                        print("Error al ingresar paciente o datos a cambiar")
+                        time.sleep(2)
+                    system('clear')  
 
                 elif opcion == 4:
                     historial_medico()

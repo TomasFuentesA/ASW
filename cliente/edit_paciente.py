@@ -19,8 +19,8 @@ def edit_paciente(): #pasar parametro usuario
 
     print(f"RUT: {id_paciente}, Nombre nuevo: {nombre_s}, Apellido nuevo: {apellido_s}, Edad nueva: {edad}, Nuevo sexo: {sexo}, Contacto nuevo: {contacto}, nuevo contacto emergencia: {contacto_emergencia}, nueva direccion: {direccion}, cambio tipo de sangre: {tipo_sangre}, cambio anotaciones: {anotaciones}")
     
-    post = str({'RUT': id_paciente, 'Nombre_nuevo': nombre_s, 'Apellido_nuevo': apellido_s, 'Edad_nueva': edad, 'Nuevosexo': sexo, 'Contacto_nuevo': contacto, 
-    'nuevo_contacto_emergencia': contacto_emergencia, 'nueva_direccion': direccion, 'cambio_tipo_de_sangre': tipo_sangre, 'cambio_anotaciones': anotaciones}).replace("'",'"').encode()
+    post = str({'id_paciente': id_paciente, 'nombre_s': nombre_s, 'apellido_s': apellido_s, 'edad': edad, 'sexo': sexo, 'contacto': contacto, 
+    'contacto_emergencia': contacto_emergencia, 'direccion': direccion, 'tipo_sangre': tipo_sangre, 'anotaciones': anotaciones}).replace("'",'"').encode()
     
     # Connect the socket to the port where the server is listening
     server_address = ('localhost', 5007)
