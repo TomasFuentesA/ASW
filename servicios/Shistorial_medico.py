@@ -32,7 +32,6 @@ while True:
             statement = "SELECT * FROM diagnostico_medico WHERE id_paciente = '" + data["rut"]+"';"
             cursor.execute(statement)
             posts = cursor.fetchall()
-            #print(posts)
 
             if posts == None:
                 print('No existe historial', client_address)
