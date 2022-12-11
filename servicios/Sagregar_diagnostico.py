@@ -3,7 +3,6 @@ import os
 from db import get_db
 import hashlib
 
-
 database = get_db()
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -32,7 +31,7 @@ while True:
             if data:
                 cursor = database.cursor()
                 statement = "INSERT INTO diagnostico_medico (id_cuenta, id_paciente, diagnostico, informacion_adicional, tratamiento, fecha_diagnostico) VALUES (?,?,?,?,?,?);"
-                cursor.execute(statement, [int(data["id_cuenta"]),int(data["id_paciente"]), data["Diagnostico"], data["adicional"], data["Tratamiento"],data["Fecha"]])
+                cursor.execute(statement, [data["id_cuenta"],data["id_paciente"], data["Diagnostico"], data["adicional"], data["Tratamiento"],data["Fecha"]])
                 database.commit()
                 print('Diagnostico Ingresado')
                 connection.sendall(str(1).encode())

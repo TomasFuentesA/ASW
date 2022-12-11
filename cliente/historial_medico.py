@@ -20,12 +20,13 @@ def historial_medico():
         while amount_received < amount_expected:
             data = sock.recv(4096)
             amount_received += len(data)
-            #print('received {!r}'.format(data))
-
-            datos = list(data.decode("utf-8").split(" "))
-            #print("hola\n")
-            print(datos)
-            return datos[0], datos[6]
+            if data:   
+                print('received {!r}'.format(data))
+                datos = list(data.decode("utf-8").split(" "))
+                return datos[0], datos[6]
+            else:
+                print('No existe historial')
+                return
     finally:
         print('closing socket')
         sock.close()
