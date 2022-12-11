@@ -29,6 +29,12 @@ while True:
             data = json.loads(data)
 #           print('received {!r}',data)
 
+            m = hashlib.sha256()
+            pw = bytes(data["pw"],'UTF-8')
+            m.update(pw)
+            data["pw"] = m.hexdigest()
+            print(data["pw"])
+
             cursor = database.cursor()
             statement = "SELECT * FROM cuenta WHERE correo = '" + data["usuario"] + "' AND contrasena = '"+data["pw"]+"';" #Solo select flag
             cursor.execute(statement)

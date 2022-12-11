@@ -29,6 +29,12 @@ while True:
             data = json.loads(data)
             print('received {!r}',data)
 
+            m = hashlib.sha256()
+            pw = bytes(data["contrasena"],'UTF-8')
+            m.update(pw)
+            data["contrasena"] = m.hexdigest()
+            print(data["contrasena"])
+
             try:
                 cursor = database.cursor()
                 statement = "INSERT INTO cuenta (id_cuenta,correo,contrasena, nombre_s,apellido_s,especialidad,flag_contrasena) VALUES (?,?,?,?,?,?,?);" #Solo select flag
