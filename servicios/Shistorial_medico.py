@@ -29,7 +29,7 @@ while True:
             print('received {!r}',data)
 
             cursor = database.cursor()
-            statement = "SELECT * FROM diagnostico_medico WHERE id_paciente = '" + data["rut"]+"';"
+            statement = "SELECT diagonostico_medico.*, cuenta.nombre_s, cuenta.apellido_s FROM diagnostico_medico, cuenta WHERE dignostico_medico.id_paciente = '" + data["rut"]+"' AND diagnostico_medico.id_cuenta = cuenta.id_cuenta;"
             cursor.execute(statement)
             posts = cursor.fetchall()
 
