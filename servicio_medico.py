@@ -6,6 +6,7 @@ from cliente.edit_paciente import edit_paciente
 from cliente.agregar_diagnostico import Agregar_diagnostico
 from cliente.historial_medico import historial_medico
 from cliente.agregar_cuenta import agregar_medico
+from cliente.delete_medico import delete_medico
 
 import sqlite3
 from os import system
@@ -14,10 +15,10 @@ import time
 DATABASE_NAME = "servicios/servicios_medicos.db"
 
 isAdmin = -1
-correo = ""
+id_cuenta = ""
 
 def main():
-    global isAdmin, correo
+    global isAdmin, id_cuenta
     conn = sqlite3.connect(DATABASE_NAME)
     cur = conn.cursor()
     conn.commit()
@@ -38,7 +39,7 @@ def main():
                         isAdmin = 0
                     else:
                         if not int(flag):
-                            x, id_c = Cambio_pw(id_cuenta)
+                            x, id_cuenta = Cambio_pw(id_cuenta)
                             isAdmin = int(x)
                             print('Vuelve a iniciar sesion')
                             time.sleep(2)
@@ -57,8 +58,8 @@ def main():
         elif isAdmin == 0:
             print('Soy Admin')
             print("Que desea hacer?")
-            print("1. añadir cuenta")
-            print("2. Entrar al Foro")
+            print("1. Añadir cuenta")
+            print("2. Eliminar cuenta")
             print("3. Modificar inventario")
             print("4. Salir")
             try:
@@ -66,8 +67,7 @@ def main():
                 if opcion == 1:
                     agregar_medico()
                 elif opcion == 2:
-                    print("Saliendo")
-                    return
+                    deletem = delete_medico()
                 elif opcion == 3:
                     delete = delete_paciente()
                     if int(delete) == -1:
@@ -97,7 +97,7 @@ def main():
                     time.sleep(5)
 
                 elif opcion == 2:
-                    Agregar_diagnostico(isAdmin)
+                    Agregar_diagnostico(id_cuenta)
                     print("Saliendo")
 
                 elif opcion == 3:
