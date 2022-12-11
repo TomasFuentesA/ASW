@@ -9,7 +9,7 @@ database = get_db()
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('localhost', 5005)
+server_address = ('localhost', 7305)
 print('starting up on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
@@ -27,7 +27,7 @@ while True:
         while True:
             data = connection.recv(4096).decode()
             data = json.loads(data)
-            print('received {!r}',data)
+#           print('received {!r}',data)
 
             cursor = database.cursor()
             statement = "SELECT * FROM cuenta WHERE correo = '" + data["usuario"] + "' AND contrasena = '"+data["pw"]+"';" #Solo select flag
