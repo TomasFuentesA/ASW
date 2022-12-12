@@ -28,7 +28,7 @@ def Login():
                     #print('received {!r}'.format(data))
                     datos = list(data.decode("utf-8").split(" "))
                     print(datos[0])
-                    return datos[0], datos[6]
+                    return datos[0], datos[1]
             finally:
                 print('closing socket')
                 sock.close()

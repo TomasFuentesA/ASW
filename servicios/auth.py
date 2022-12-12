@@ -36,7 +36,7 @@ while True:
             print(data["pw"])
 
             cursor = database.cursor()
-            statement = "SELECT * FROM cuenta WHERE correo = '" + data["usuario"] + "' AND contrasena = '"+data["pw"]+"';" #Solo select flag
+            statement = "SELECT id_cuenta, flag FROM cuenta WHERE correo = '" + data["usuario"] + "' AND contrasena = '"+data["pw"]+"';" #Solo select flag
             cursor.execute(statement)
             posts = cursor.fetchone()
             print(posts)
