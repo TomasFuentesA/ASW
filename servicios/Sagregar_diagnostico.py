@@ -26,7 +26,7 @@ while True:
         while True:
             data = connection.recv(1000000).decode()
             data = json.loads(data)
-            print('received {!r}',data)
+#           print('received {!r}',data)
 
             if data:
                 cursor = database.cursor()
@@ -38,6 +38,7 @@ while True:
                 break
             else:
                 print('Ingrese un Diagnostico correcto', client_address)
+                connection.sendall(str(-1).encode())
                 break
     finally:
         connection.close()  

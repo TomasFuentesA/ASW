@@ -7,7 +7,7 @@ database = get_db()
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('localhost', 5007)
+server_address = ('localhost', 5277)
 print('starting up on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
@@ -24,7 +24,7 @@ while True:
         while True:
             data = connection.recv(65507).decode()
             data = json.loads(data)
-            print('received {!r}',data)
+#           print('received {!r}',data)
             try: 
                 if data["id_paciente"] != '':
                     cursor = database.cursor()
@@ -39,8 +39,10 @@ while True:
                     cursor.execute(statement)
                     database.commit()
                 connection.sendall(str(1).encode())
+                print("Se modificaron los datos del paciente: ",data["id_paciente"])
                 break
-            except:
+            except Exception as e:
+                print(e)
                 connection.sendall(str(-1).encode())
                 print("No se encontró paciente")
                 break

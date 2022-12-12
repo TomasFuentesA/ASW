@@ -9,7 +9,7 @@ database = get_db()
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('localhost', 5020)
+server_address = ('localhost', 5920)
 print('starting up on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
@@ -26,12 +26,14 @@ while True:
         # Receive the data in small chunks and retransmit it
         while True:
             data = connection.recv(4096).decode()
-            print(type(data))
+#           print(type(data))
             data = json.loads(data)
-            print('received {!r}',data)
+#           print('received {!r}',data)
 
             try:
                 cursor = database.cursor()
+                statement = "DELETE FROM diagnostico_medico WHERE id_paciente = '" +data["Usuario"]+"';" 
+                cursor.execute(statement)
                 statement = "DELETE FROM paciente WHERE id_paciente = '" +data["Usuario"]+"';" 
                 cursor.execute(statement)
                 database.commit()
@@ -41,6 +43,7 @@ while True:
             
             except:
                 print("No se encontró paciente")
+                connection.sendall(str(1).encode())
                 break
     finally:
         connection.close()  

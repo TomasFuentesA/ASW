@@ -9,7 +9,7 @@ database = get_db()
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('localhost', 5030)
+server_address = ('localhost', 6930)
 print('starting up on {} port {}'.format(*server_address))
 sock.bind(server_address)
 

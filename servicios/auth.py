@@ -9,7 +9,7 @@ database = get_db()
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('localhost', 7305)
+server_address = ('localhost', 8605)
 print('starting up on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
@@ -33,7 +33,7 @@ while True:
             pw = bytes(data["pw"],'UTF-8')
             m.update(pw)
             data["pw"] = m.hexdigest()
-            print(data["pw"])
+#           print(data["pw"])
 
             cursor = database.cursor()
             statement = "SELECT * FROM cuenta WHERE correo = '" + data["usuario"] + "' AND contrasena = '"+data["pw"]+"';" #Solo select flag

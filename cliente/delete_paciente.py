@@ -8,12 +8,12 @@ def delete_paciente(): #pasar parametro usuario
     while True:
         rut = input("Ingrese RUT paciente a eliminar: ")
         if(verificar_rut(rut)):
-            print(f"Rut paciente: {rut}")
+#            print(f"Rut paciente: {rut}")
             post = str({'Usuario': rut}).replace("'",'"').encode()
-            print(post)
+#            print(post)
             
             # Connect the socket to the port where the server is listening
-            server_address = ('localhost', 5020)
+            server_address = ('localhost', 5920)
             print('connecting to {} port {}'.format(*server_address))
             sock.connect(server_address)
             try: 
@@ -24,7 +24,7 @@ def delete_paciente(): #pasar parametro usuario
                 while amount_received < amount_expected:
                     data = sock.recv(4096)
                     amount_received += len(data)
-                    print('received {!r}'.format(data))
+#                   print('received {!r}'.format(data))
                     return int(data.decode("utf-8"))
             finally:
                 print('closing socket')

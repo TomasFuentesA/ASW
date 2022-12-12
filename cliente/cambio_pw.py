@@ -10,7 +10,7 @@ def Cambio_pw(Usuario): #pasar parametro usuario
     post = str({'Usuario': Usuario,'Password': pw1, 'c_Password': pw2}).replace("'",'"').encode()
     
     # Connect the socket to the port where the server is listening
-    server_address = ('localhost', 7002)
+    server_address = ('localhost', 7032)
     print('connecting to {} port {}'.format(*server_address))
     sock.connect(server_address)
     try: 

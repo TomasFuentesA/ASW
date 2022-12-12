@@ -16,7 +16,7 @@ def agregar_medico():
             post = str({'id_cuenta': rut,'correo': correo,'contrasena':contrasena,'nombre_s': nombre_s ,'apellido_s' : apellido_s,  'especialidad' : especialidad, 'flag_contrasena' : flag}).replace("'",'"').encode()
             
             # Connect the socket to the port where the server is listening
-            server_address = ('localhost', 5030)
+            server_address = ('localhost', 6930)
             print('connecting to {} port {}'.format(*server_address))
             sock.connect(server_address)
             try: 
@@ -27,11 +27,10 @@ def agregar_medico():
                 while amount_received < amount_expected:
                     data = sock.recv(1000000)
                     amount_received += len(data)
-                    print('received {!r}'.format(data))
+#                    print('received {!r}'.format(data))
 
                     datos = list(data.decode("utf-8").split(" "))
-                    print(datos[0])
-                    return "cuenta creada"
+                    return datos[0]
             finally:
                 print('closing socket')
                 sock.close()
