@@ -6,6 +6,7 @@ from cliente.edit_paciente import edit_paciente
 from cliente.agregar_diagnostico import Agregar_diagnostico
 from cliente.historial_medico import historial_medico
 from cliente.agregar_cuenta import agregar_medico
+from cliente.delete_medico import delete_medico
 
 import sqlite3
 from os import system
@@ -39,12 +40,14 @@ def main():
                     else:
                         if not int(flag):
                             x, id_cuenta = Cambio_pw(id_cuenta)
-                            isAdmin = int(x)
-                            print('Vuelve a iniciar sesion')
-                            time.sleep(2)
+                            if int(x) == -2:
+                                print('Correo o contraseña incorrecta')
+                            else:
+                                isAdmin = int(x)
+                                print('Su contraseña se cambio exitosamente')
                         else:
                             isAdmin = int(flag)
-                    system('clear')
+#                    system('clear')
                 elif opcion == 2:
                     print("Saliendo")
                     system('clear')
@@ -58,24 +61,25 @@ def main():
             print('Soy Admin')
             print("Que desea hacer?")
             print("1. Añadir cuenta")
-            print("2. Eliminar cuenta")
-            print("3. Modificar inventario")
-            print("4. Salir")
+            print("2. Eliminar paciente")
+            print("3. Salir")
             try:
                 opcion = int(input("Ingrese una opcion: ").strip())
                 if opcion == 1:
-                    agregar_medico()
+                    var = agregar_medico()
+                    if var == '1':
+                        print("Cuenta creada correctamente")
+                    else:
+                        print("Error en crear cuenta")
                 elif opcion == 2:
-                    deletem = delete_medico()
-                elif opcion == 3:
                     delete = delete_paciente()
                     if int(delete) == -1:
-                        print("Se ha borrado el paciente de manera satisfactoria")
-                        time.sleep(2)
-                    system('clear')  
-                elif opcion == 4:
+                        print("Se han borrado los datos asociados al paciente de manera satisfactoria")
+                    else:
+                        print("No se han encontrado datos asociados al paciente")
+                elif opcion == 3:
                     print("Saliendo")
-                    return
+                    return     
                 else:
                     print("Opcion invalida")
             except:
@@ -92,16 +96,16 @@ def main():
                 opcion = int(input("Ingrese una opcion: ").strip())
                 if opcion == 1:
                     agregar_paciente()
-                    print("agregado")
-                    time.sleep(5)
-
                 elif opcion == 2:
-                    Agregar_diagnostico(id_cuenta)
+                    diagno = Agregar_diagnostico("19689912-k")
+                    if int(diagno) == 1:
+                        print("Se ha agregado el diagnostico")
+                    else:
+                        print("No se ha agregado el diagnostico")
                     print("Saliendo")
-
                 elif opcion == 3:
                     print("Editar Paciente")
-                    valor = edit_paciente()
+                    edit_paciente()
 
                 elif opcion == 4:
                     historial_medico()
@@ -110,7 +114,8 @@ def main():
                     print("Saliendo")
                     return
                 else:
-                    print("Opcion invalida")
-            except:
-                print("Opcion invalida")
+                    print("Opcion invalida A")
+            except Exception as e:
+                print(e)
+                print("Opcion invalida B")
 main()

@@ -40,7 +40,7 @@ CREATE TABLE diagnostico_medico (
 
 INSERT INTO cuenta(id_cuenta, correo, contrasena, nombre_s,apellido_s,especialidad,flag_contrasena)
 VALUES('0','admin@admin.cl','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918','admin','admin','admin',1),
-      ('06.123.434-2','medico1@medico1.cl','medico1234','medico1','medico1','Neurocirujano',0);
+      ('19689912-k','medico1@medico1.cl','8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918','medico1','medico1','Neurocirujano',0);
 
 INSERT INTO paciente(id_paciente,nombre_s, apellido_s, edad, sexo, contacto, contacto_emergencia, direccion, tipo_sangre, anotaciones)
-VALUES('12.312.312-k','Jorge','Elliot','75',1,569123456789,0,'',2,'Pase las Notas');
+VALUES('19689912-k','Jorge','Elliot','75',1,569123456789,0,'',2,'Pase las Notas');

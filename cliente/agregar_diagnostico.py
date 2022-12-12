@@ -21,7 +21,7 @@ def Agregar_diagnostico(id_cuenta):
 
             #print(f"Diagnostico: {diagnostico} \nTratamiento: {tratamiento}")
             post = str({'Diagnostico': diagnostico, 'Tratamiento': tratamiento, 'Fecha': fecha, 'id_cuenta': id_cuenta, 'id_paciente': rut, 'adicional': adicional}).replace("'",'"').encode()
-            print(post)
+#           print(post)
             # Connect the socket to the port where the server is listening
             server_address = ('localhost', 5009)
             print('connecting to {} port {}'.format(*server_address))
@@ -34,11 +34,10 @@ def Agregar_diagnostico(id_cuenta):
                 while amount_received < amount_expected:
                     data = sock.recv(1000000)
                     amount_received += len(data)
-                    print('received {!r}'.format(data))
+#                   print('received {!r}'.format(data))
+#                   print(datos[0])
 
-                    datos = list(data.decode("utf-8").split(" "))
-                    print(datos[0])
-                    return datos[0], datos[6]
+                    return data.decode()
             finally:
                 print('closing socket')
                 sock.close()

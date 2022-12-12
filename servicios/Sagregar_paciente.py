@@ -9,7 +9,7 @@ database = get_db()
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('localhost', 5015)
+server_address = ('localhost', 6965)
 print('starting up on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
@@ -27,23 +27,17 @@ while True:
         while True:
             data = connection.recv(1000000).decode()
             data = json.loads(data)
-            print('received {!r}',data)
+#           print('received {!r}',data)
             try:
-                for key,value in data.items():
-                    if(key in ["id_paciente", "nombre_s", "apellido_s", "edad", "sexo"] and value==''):
-                        print('Ingreso paciente erroneo', client_address)
-                        break
-                    elif(key in ["contacto", "contacto_emergencia", "tipo_sangre"] and value == ''):
-                        data[key] = 0
                 cursor = database.cursor()
-                statement = "INSERT INTO paciente (id_paciente,nombre_s, apellido_s, edad, sexo, contacto, contacto_emergencia, direccion, tipo_sangre, anotaciones) VALUES (?,?,?,?,?,?,?,?,?,?);"
+                statement = "INSERT INTO paciente (id_paciente,nombre_s, apellido_s, edad, sexo, contacto, contacto_emergencia, direccion, tipo_sangre, anotaciones) VALUES (?,?,?,?,?,?,?,?,?,?);" #Solo select flag
                 cursor.execute(statement,[data["id_paciente"],data["nombre_s"],data["apellido_s"],int(data["edad"]),int(data["sexo"]),int(data["contacto"]),int(data["contacto_emergencia"]),data["direccion"],int(data["tipo_sangre"]),data["anotaciones"]])
                 database.commit()
                 print('Envío de datos al cliente')
                 connection.sendall(str(1).encode())
                 break
             except:
-                print('Ingreso paciente erroneo', client_address)
+                print('Ingreso de paciente erroneo', client_address)
                 break
     finally:
         connection.close()  
