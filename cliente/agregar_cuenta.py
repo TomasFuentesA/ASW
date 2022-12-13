@@ -14,7 +14,9 @@ def agregar_medico():
                 apellido_s = input("Ingrese apellido: ")
                 if contrasena != '' and nombre_s != '' and apellido_s != '':       
                     especialidad = input("Ingrese especialidad (opcional): ")
-                    flag=0 
+                    flag=0
+                    if especialidad == '':
+                        especialidad = "Medico General" 
                     post = str({'id_cuenta': rut.lower(),'correo': correo,'contrasena':contrasena,'nombre_s': nombre_s ,'apellido_s' : apellido_s,  'especialidad' : especialidad, 'flag_contrasena' : flag}).replace("'",'"').encode()
                     
                     # Connect the socket to the port where the server is listening
