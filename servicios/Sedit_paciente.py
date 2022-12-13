@@ -35,12 +35,16 @@ while True:
                                 statement = statement+key+"="+value+","
                             else:
                                 statement = statement+key+"='"+value+"',"
-                    statement = statement.rstrip(statement[-1]) + " WHERE id_paciente = '"+data['id_paciente']+"'"
+                    statement = statement.rstrip(statement[-1]) + " WHERE id_paciente = '"+data['id_paciente']+"';"
                     cursor.execute(statement)
                     database.commit()
-                connection.sendall(str(1).encode())
-                print("Se modificaron los datos del paciente: ",data["id_paciente"])
-                break
+                    connection.sendall(str(1).encode())
+                    print("Se modificaron los datos del paciente: ",data["id_paciente"])
+                    break
+                else:
+                    connection.sendall(str(-1).encode())
+                    print("No se encontró paciente")
+                    break
             except Exception as e:
                 print(e)
                 connection.sendall(str(-1).encode())

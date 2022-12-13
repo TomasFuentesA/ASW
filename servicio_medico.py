@@ -6,23 +6,17 @@ from cliente.edit_paciente import edit_paciente
 from cliente.agregar_diagnostico import Agregar_diagnostico
 from cliente.historial_medico import historial_medico
 from cliente.agregar_cuenta import agregar_medico
-from cliente.delete_medico import delete_medico
 
 import sqlite3
 from os import system
 import time
 
-DATABASE_NAME = "servicios/servicios_medicos.db"
 
 isAdmin = -1
 id_cuenta = ""
 
 def main():
     global isAdmin, id_cuenta
-    conn = sqlite3.connect(DATABASE_NAME)
-    cur = conn.cursor()
-    conn.commit()
-    system("clear")
     while True:
 
         if isAdmin < 0:
@@ -40,7 +34,7 @@ def main():
                     else:
                         if not int(flag):
                             x, id_cuenta = Cambio_pw(id_cuenta)
-                            if int(x) == -2:
+                            if int(x) == -1:
                                 print('Correo o contraseña incorrecta')
                             else:
                                 isAdmin = int(x)
@@ -53,7 +47,10 @@ def main():
                     system('clear')
                     return
                 else:
-                    print("Opcion invalida A")
+                    print("Opcion invalida")
+
+                time.sleep(2)
+                system("clear")      
             except:
                 print("Error ingreso de sesion, verificar datos")
         
@@ -62,7 +59,8 @@ def main():
             print("Que desea hacer?")
             print("1. Añadir cuenta")
             print("2. Eliminar paciente")
-            print("3. Salir")
+            print("3. Cerrar sesión")
+            print("4. Cerrar el programa")
             try:
                 opcion = int(input("Ingrese una opcion: ").strip())
                 if opcion == 1:
@@ -71,6 +69,7 @@ def main():
                         print("Cuenta creada correctamente")
                     else:
                         print("Error en crear cuenta")
+  
                 elif opcion == 2:
                     delete = delete_paciente()
                     if int(delete) == -1:
@@ -79,9 +78,17 @@ def main():
                         print("No se han encontrado datos asociados al paciente")
                 elif opcion == 3:
                     print("Saliendo")
-                    return     
+                    isAdmin = -1
+                elif opcion == 4:
+                    print("Cerrando el programa")
+                    time.sleep(1)
+                    return      
                 else:
                     print("Opcion invalida")
+                
+                
+                time.sleep(2)
+                system("clear")      
             except:
                 print("Opcion invalida")
         else:
@@ -91,31 +98,43 @@ def main():
             print("2. añadir diagnostico")
             print("3. editar paciente")
             print("4. Consultar Historial Medico de un paciente")
-            print("5. Salir")
+            print("5. Cerrar sesión")
+            print("6. Cerrar el programa")
             try:
                 opcion = int(input("Ingrese una opcion: ").strip())
                 if opcion == 1:
-                    agregar_paciente()
+                    if agregar_paciente() == 1:
+                        print("Se ha agregado el paciente")
+                    else:
+                        print("No se ha agregado el paciente")
+
                 elif opcion == 2:
-                    diagno = Agregar_diagnostico("19689912-k")
+                    diagno = Agregar_diagnostico(id_cuenta)
                     if int(diagno) == 1:
                         print("Se ha agregado el diagnostico")
                     else:
                         print("No se ha agregado el diagnostico")
-                    print("Saliendo")
                 elif opcion == 3:
                     print("Editar Paciente")
                     edit_paciente()
 
                 elif opcion == 4:
                     historial_medico()
-                    print("Saliendo")
                 elif opcion == 5:
                     print("Saliendo")
+                    isAdmin = -1
+                elif opcion == 6:
+                    print("Cerrando programa")
+                    time.sleep(1)
                     return
                 else:
-                    print("Opcion invalida A")
+                    print("Opcion invalida")
+
+                time.sleep(2)
+                system("clear")
+
+
             except Exception as e:
                 print(e)
-                print("Opcion invalida B")
+                print("Opcion invalida")
 main()

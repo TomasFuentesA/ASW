@@ -23,7 +23,7 @@ def verificar_rut(rut):
                         digito="K"
                     else: 
                         digito=resultado
-                if(str(digito).lower() == rut_lista[1]):
+                if(str(digito).lower() == rut_lista[1].lower()):
                     return True
                 else:
                     return False

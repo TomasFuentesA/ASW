@@ -30,6 +30,12 @@ while True:
 #           print('received {!r}',data)
             try:
                 cursor = database.cursor()
+                if data["contacto"] == '':
+                    data["contacto"] = 0
+                if data["contacto_emergencia"] == '':
+                    data["contacto_emergencia"] = 0
+                if data["tipo_sangre"] == '':
+                    data["tipo_sangre"] = 0
                 statement = "INSERT INTO paciente (id_paciente,nombre_s, apellido_s, edad, sexo, contacto, contacto_emergencia, direccion, tipo_sangre, anotaciones) VALUES (?,?,?,?,?,?,?,?,?,?);" #Solo select flag
                 cursor.execute(statement,[data["id_paciente"],data["nombre_s"],data["apellido_s"],int(data["edad"]),int(data["sexo"]),int(data["contacto"]),int(data["contacto_emergencia"]),data["direccion"],int(data["tipo_sangre"]),data["anotaciones"]])
                 database.commit()
@@ -38,6 +44,7 @@ while True:
                 break
             except:
                 print('Ingreso de paciente erroneo', client_address)
+                connection.sendall(str(-1).encode())
                 break
     finally:
         connection.close()  

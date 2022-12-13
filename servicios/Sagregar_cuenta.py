@@ -9,7 +9,7 @@ database = get_db()
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 # Bind the socket to the port
-server_address = ('localhost', 6930)
+server_address = ('localhost', 6931)
 print('starting up on {} port {}'.format(*server_address))
 sock.bind(server_address)
 
@@ -37,13 +37,14 @@ while True:
 
             try:
                 cursor = database.cursor()
-                statement = "INSERT INTO cuenta (id_cuenta,correo,contrasena, nombre_s,apellido_s,especialidad,flag_contrasena) VALUES (?,?,?,?,?,?,?);" #Solo select flag
+                statement = "INSERT INTO cuenta (id_cuenta,correo,contrasena, nombre_s,apellido_s,especialidad,flag_contrasena) VALUES (?,?,?,?,?,?,?);"
                 cursor.execute(statement,[data["id_cuenta"],data["correo"],data["contrasena"],data["nombre_s"],data["apellido_s"],data["especialidad"],int(data["flag_contrasena"])])
                 database.commit()
                 print('Envío de datos al cliente')
                 connection.sendall(str(1).encode())
                 break
-            except:
+            except Exception as e:
+                print(e)
                 print('Ingreso medico erróneo', client_address)
                 break
     finally:

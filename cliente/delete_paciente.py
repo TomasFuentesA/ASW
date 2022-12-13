@@ -9,7 +9,7 @@ def delete_paciente(): #pasar parametro usuario
         rut = input("Ingrese RUT paciente a eliminar: ")
         if(verificar_rut(rut)):
 #            print(f"Rut paciente: {rut}")
-            post = str({'Usuario': rut}).replace("'",'"').encode()
+            post = str({'Usuario': rut.lower()}).replace("'",'"').encode()
 #            print(post)
             
             # Connect the socket to the port where the server is listening

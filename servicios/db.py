@@ -14,4 +14,4 @@ def init_db():
     with open('schema.sql') as f:
         db.executescript(f.read())
 
-init_db()
+#init_db()
