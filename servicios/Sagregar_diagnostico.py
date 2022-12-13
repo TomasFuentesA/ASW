@@ -33,7 +33,7 @@ while True:
                 statement = "INSERT INTO diagnostico_medico (id_cuenta, id_paciente, diagnostico, informacion_adicional, tratamiento, fecha_diagnostico) VALUES (?,?,?,?,?,?);"
                 cursor.execute(statement, [data["id_cuenta"],data["id_paciente"], data["Diagnostico"], data["adicional"], data["Tratamiento"],data["Fecha"]])
                 database.commit()
-                print('Diagnostico Ingresado')
+                print('Diagnostico del paciente '+data["id_paciente"]+' agregado correctamente')
                 connection.sendall(str(1).encode())
                 break
             else:

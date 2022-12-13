@@ -15,7 +15,8 @@ def historial_medico():
             print('connecting to {} port {}'.format(*server_address))
             sock.connect(server_address)
             try:
-                bar() 
+                bar()
+                print("{:<15} {:<14} {:<20} {:<20} {:<20} {:<20}".format("Fecha Tratamiento", "Rut Médico", "Nombre Médico", "Diagnostico", "Tratamiento", "Información Adicional")) 
                 sock.sendall(post)
                 amount_received = 0
                 amount_expected = len(post)
@@ -25,7 +26,12 @@ def historial_medico():
                     amount_received += len(data)
                     var = data.decode()
                     if len(var) != 0:
-                        print(var)
+                        shistorial = var.split(')')
+                        for i in shistorial:
+                            if i != '':
+                                i = i.replace('(', '')
+                                lshistorial = list(i.split(","))                            
+                                print("{:<15} {:<14} {:<20} {:<20} {:<20} {:<20}".format(lshistorial[6], lshistorial[1], lshistorial[7] + lshistorial[8], lshistorial[3], lshistorial[4], lshistorial[5] ))
                         input("Presione enter para cerrar historial")
 #                        datos = list(data.decode("utf-8").split(" "))
                         return

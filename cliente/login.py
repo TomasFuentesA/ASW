@@ -27,7 +27,7 @@ def Login():
                     amount_received += len(data)
                     #print('received {!r}'.format(data))
                     datos = list(data.decode("utf-8").split(" "))
-                    print(datos[0])
+#                   print(datos[0])
                     return datos[0], datos[1]
             finally:
                 print('closing socket')
